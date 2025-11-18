@@ -1,0 +1,20 @@
+services:
+  webhook-calculator:
+    container_name: f1_webhook-calculator
+    networks:
+      - dev_net
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    security_opt:
+      - seccomp:unconfined
+    cap_add: ["SYS_PTRACE"]
+    command: "tail -f /dev/null"
+    volumes:
+      - ./:/app
+    environment:
+      DATABSE_URL: postgres://postgres:password@localhost:5432/webhook
+
+networks:
+  dev_net:
+    external: true
