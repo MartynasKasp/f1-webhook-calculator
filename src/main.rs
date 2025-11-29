@@ -3,7 +3,7 @@ mod db;
 mod handlers;
 mod models;
 
-use axum::{Router, routing::post, extract::State};
+use axum::{Router, routing::post};
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -23,7 +23,7 @@ async fn main() {
     // sqlx::migrate!().run(&pool).await.unwrap();
 
     let app = Router::new()
-        .route("/webhook/calculate-permutation", post(handlers::webhook_handler))
+        .route("/webhook/calculate-permutation", post(handlers::calculate_permutation_handler))
         .layer(TraceLayer::new_for_http())
         .with_state(pool);
 

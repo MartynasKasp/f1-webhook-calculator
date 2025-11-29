@@ -1,5 +1,5 @@
 services:
-  webhook-calculator:
+  app:
     container_name: f1_webhook-calculator
     networks:
       - dev_net
@@ -13,7 +13,7 @@ services:
     volumes:
       - ./:/app
     environment:
-      DATABSE_URL: postgres://postgres:password@localhost:5432/webhook
+      DATABASE_URL: postgres://postgres:password@localhost:5432/webhook
 
 networks:
   dev_net:

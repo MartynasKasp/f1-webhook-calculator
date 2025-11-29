@@ -13,7 +13,7 @@ impl IntoResponse for AppError {
     fn into_response(self) -> axum::response::Response {
         let (status, message) = match self {
             AppError::Sqlx(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Database error"),
-            AppError::Validation(msg) => (StatusCode::BAD_REQUEST, msg),
+            AppError::Validation(_) => (StatusCode::BAD_REQUEST, "hmm"),
         };
 
         (status, Json(serde_json::json!({ "error": message }))).into_response()
